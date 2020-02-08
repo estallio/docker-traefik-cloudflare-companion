@@ -61,17 +61,17 @@ cat <<EOF >> /usr/sbin/cloudflare-companion
 
 def check_container(c):
     for prop in c.attrs.get(u'Config').get(u'Labels'):
-         if re.match('traefik.*.frontend.rule', prop) :
+         if re.match('traefik.*?\.rule', prop) :
             value = c.attrs.get(u'Config').get(u'Labels').get(prop)
-            if 'Host:' in value:
-                value = value.split("Host:")[1].strip()
+            if 'Host' in value:
+                extracted_domains = re.findall(r'Host\(`(.*?)`\)', value)
                 cont_id = c.attrs.get(u'Id')
-                if ',' in value:
-                    for v in value.split(","):
+                if len(extracted_domains) > 1:
+                    for v in extracted_domains:
                         print "Found Container:",cont_id,"with Multi-Hostname",v 
                         point_domain(v)
-                else:
-                    print "Found Container:",cont_id,"with Hostname", value 
+                elif len(extracted_domains) == 1:
+                    print "Found Container:",cont_id,"with Hostname", extracted_domains[0]
                     point_domain(value)
             else:
                 pass
