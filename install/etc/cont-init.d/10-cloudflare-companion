@@ -54,6 +54,7 @@ EOF
 
 ### Finish rest of script
 cat <<EOF >> /usr/sbin/cloudflare-companion
+
     except CloudFlare.exceptions.CloudFlareAPIError as e:
         print '** %s - %d %s' % (name, e, e)
 
