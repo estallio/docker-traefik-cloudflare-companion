@@ -4,8 +4,7 @@ for s in /assets/functions/*; do source $s; done
 PROCESS_NAME="traefik-cloudflare-companion"
 
 ### Sanity Test
-sanity_var CF_EMAIL "Cloudflare Email"
-sanity_var CF_TOKEN "Cloudflare Token"
+sanity_var API_KEY "Cloudflare API-key"
 sanity_var TARGET_DOMAIN "Target Domain"
 sanity_var DOMAIN1 "Domain 1"
 sanity_var DOMAIN1_ZONE_ID "Domain 1 Zone ID"
@@ -81,12 +80,11 @@ def init():
     for c in client.containers.list(all=True):
         check_container(c)
 
-email = os.environ['CF_EMAIL']
-token = os.environ['CF_TOKEN']
+token = os.environ['API_KEY']
 target_domain = os.environ['TARGET_DOMAIN']
 domain = os.environ['DOMAIN1']
 
-cf = CloudFlare.CloudFlare(email=email, token=token)
+cf = CloudFlare.CloudFlare(token=token)
 client = docker.DockerClient(base_url='${DOCKER_ENDPOINT}')
 
 init()

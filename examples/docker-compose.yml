@@ -7,8 +7,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
-      - CF_EMAIL=noemail@example.org
-      - CF_TOKEN=1234
+      - API_KEY=1234
       - TARGET_DOMAIN=host.example.org
       - DOMAIN1=example.org
       - DOMAIN2_ZONE_ID=1234567890
