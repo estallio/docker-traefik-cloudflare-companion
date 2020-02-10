@@ -33,7 +33,7 @@ EOF
         do
         domain_tmp=DOMAIN${i}
         if [ "${!domain_tmp}" != "" ] ; then
-            cat <<EOF >> /usr/sbin/cloudflare-companion
+        cat <<EOF >> ./cloudflare-companion
 
             domain${i} = os.environ['DOMAIN${i}']
             zone_id${i} = os.environ['DOMAIN${i}_ZONE_ID']
@@ -58,13 +58,12 @@ cat <<EOF >> /usr/sbin/cloudflare-companion
     except CloudFlare.exceptions.CloudFlareAPIError as e:
         print '** %s - %d %s' % (name, e, e)
 
-
 def check_container(c):
     for prop in c.attrs.get(u'Config').get(u'Labels'):
          if re.match('traefik.*?\.rule', prop) :
             value = c.attrs.get(u'Config').get(u'Labels').get(prop)
             if 'Host' in value:
-                extracted_domains = re.findall(r'Host\(`(.*?)`\)', value)
+                extracted_domains = re.findall(r'Host\(\`(.*?)\`\)', value)
                 cont_id = c.attrs.get(u'Id')
                 if len(extracted_domains) > 1:
                     for v in extracted_domains:
@@ -75,7 +74,6 @@ def check_container(c):
                     point_domain(value)
             else:
                 pass
-
 
 def init():
     for c in client.containers.list(all=True):
