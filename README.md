@@ -1,4 +1,15 @@
-# hub.docker.com/r/tiredofit/traefik-cloudflare-companion
+#### Changes since fork:
+
+- Feb. 2020:
+  - Added support for Traefik v2
+  - Fixed a bug with special characters
+  - Fixed a bug related to parsing input
+  - Renamed Cloudflare API token
+  - Added default TTL ENV var
+  - Fixed a bug with docker's bin-path
+  - Added logs
+
+# traefik-cloudflare-companion
 
 [![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/tiredofit/traefik-cloudflare-companion)](https://hub.docker.com/r/tiredofit/traefik-cloudflare-companion)
 [![Docker Pulls](https://img.shields.io/docker/pulls/tiredofit/traefik-cloudflare-companion.svg)](https://hub.docker.com/r/tiredofit/traefik-cloudflare-companion)
