@@ -1,3 +1,5 @@
+#### Attention: it seems that most of the changes are now integrated in tiredofit/docker-traefik-cloudflare-companion and you should switch to the main repo.
+
 #### Changes since fork:
 
 - Feb. 2020:
